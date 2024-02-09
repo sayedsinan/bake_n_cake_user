@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "274382156691",
+    "project_id": "bakecakeadmin",
+    "storage_bucket": "bakecakeadmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274382156691:android:44c061548eaef8a6096e66",
+        "android_client_info": {
+          "package_name": "com.example.bake_n_cake_admin_side"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274382156691-nvat12v3slm46k3i99cj5b1qhn9nkubg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgCMXxtA6-uezDZ_9u0074J1vkFK88U1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274382156691-nvat12v3slm46k3i99cj5b1qhn9nkubg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "274382156691-2sb2rnc94pabs4t9rub87oe3d183lfji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bakeNCakeAdminSide.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274382156691:android:b745915ce29329b4096e66",
+        "android_client_info": {
+          "package_name": "com.example.bake_n_cake_user_side"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274382156691-nvat12v3slm46k3i99cj5b1qhn9nkubg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgCMXxtA6-uezDZ_9u0074J1vkFK88U1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274382156691-nvat12v3slm46k3i99cj5b1qhn9nkubg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "274382156691-2sb2rnc94pabs4t9rub87oe3d183lfji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bakeNCakeAdminSide.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
