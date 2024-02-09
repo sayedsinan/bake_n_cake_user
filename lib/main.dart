@@ -1,4 +1,6 @@
 import 'package:bake_n_cake_user_side/view/login/login_page.dart';
+import 'package:bake_n_cake_user_side/view/navigationbar/navigation_bar.dart';
+import 'package:bake_n_cake_user_side/view/searchpage/search_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: LandingPage(),
     );
   }
 }
