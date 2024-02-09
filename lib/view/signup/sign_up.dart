@@ -1,11 +1,11 @@
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/login/logo.dart';
-import 'package:bake_n_cake_user_side/view/sign_up/divider.dart';
-import 'package:bake_n_cake_user_side/view/sign_up/sign_up_app_bar.dart';
-import 'package:bake_n_cake_user_side/view/sign_up/sign_up_button.dart';
-import 'package:bake_n_cake_user_side/view/sign_up/sign_up_text_field.dart';
-import 'package:bake_n_cake_user_side/view/sign_up/text_accout.dart';
+import 'package:bake_n_cake_user_side/view/signup/divider.dart';
+import 'package:bake_n_cake_user_side/view/signup/sign_up_app_bar.dart';
+import 'package:bake_n_cake_user_side/view/signup/sign_up_button.dart';
+import 'package:bake_n_cake_user_side/view/signup/sign_up_text_field.dart';
+import 'package:bake_n_cake_user_side/view/signup/text_accout.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {

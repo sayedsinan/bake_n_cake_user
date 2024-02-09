@@ -1,8 +1,8 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
-import 'package:bake_n_cake_user_side/view/hompage/appbar.dart';
-import 'package:bake_n_cake_user_side/view/hompage/my_card.dart';
+import 'package:bake_n_cake_user_side/view/home/appbar.dart';
+import 'package:bake_n_cake_user_side/view/home/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

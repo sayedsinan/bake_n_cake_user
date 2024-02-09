@@ -1,5 +1,5 @@
-import 'package:bake_n_cake_user_side/view/errorpage/error_page.dart';
-import 'package:bake_n_cake_user_side/view/hompage/home_page.dart';
+import 'package:bake_n_cake_user_side/view/error/error_page.dart';
+import 'package:bake_n_cake_user_side/view/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
