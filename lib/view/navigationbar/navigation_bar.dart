@@ -2,6 +2,7 @@ import 'package:bake_n_cake_user_side/controller/navigatoion_controller.dart';
 import 'package:bake_n_cake_user_side/view/cart/cart_page.dart';
 import 'package:bake_n_cake_user_side/view/home/home_page.dart';
 import 'package:bake_n_cake_user_side/view/profile/profile_page.dart';
+import 'package:bake_n_cake_user_side/view/profile/profile_page_app_bar.dart';
 import 'package:bake_n_cake_user_side/view/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

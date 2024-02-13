@@ -20,45 +20,46 @@ class CartPage extends StatelessWidget {
       backgroundColor: maincolor,
       body: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    tileColor: secondColor,
-                    title: Row(
-                      children: [
-                        Text(
-                          "Red Velvet Cake",
-                          style: normalstyling(15),
-                        ),
-                        SizedBox(
-                          width: sizeof.size.width * 0.5,
-                        ),
-                        Container(
-                          height: 10,
-                          width: 4,
-                          color: Colors.red,
-                        )
-                      ],
-                    ) // Example text for demonstration
-                    ,
-                    subtitle: Row(
-                      children: [
-                        // Container(height: sizeof.size.he,)
-                      ],
-                    ),
+          ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  tileColor: secondColor,
+                  title: Row(
+                    children: [
+                      Text(
+                        "Red Velvet Cake",
+                        style: normalstyling(15),
+                      ),
+                      SizedBox(
+                        width: sizeof.size.width * 0.5,
+                      ),
+                      Container(
+                        height: 10,
+                        width: 4,
+                        color: Colors.red,
+                      )
+                    ],
+                  ) // Example text for demonstration
+                  ,
+                  subtitle: Row(
+                    children: [
+                     Container(height: 4,width: 5,color: Colors.grey,),
+                     SizedBox(width: 5,),
+                     Text("₹ 2999",style:normalstyling(15) ,),
+                     
+                    ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(1),
             alignment: Alignment.center,
             child: Text(
               'Additional Content Below List',

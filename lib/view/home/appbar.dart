@@ -1,8 +1,7 @@
-import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -10,7 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeof = MediaQuery.of(context);
+    // final sizeof = MediaQuery.of(context);
     return AppBar(
       backgroundColor: maincolor,
       elevation: 0,

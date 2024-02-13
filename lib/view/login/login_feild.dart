@@ -1,11 +1,10 @@
-import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 Column login() {
-  final controller =Get.put(UserController);
+  // final controller =Get.put(UserController);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
