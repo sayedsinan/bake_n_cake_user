@@ -1,5 +1,7 @@
 import 'package:bake_n_cake_user_side/style/color.dart';
+import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfilePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ProfilePageAppBar({super.key});
@@ -9,21 +11,16 @@ class ProfilePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     var sizeof = MediaQuery.of(context);
     return AppBar(
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      leading: Icon(Icons.arrow_back_ios),
-      title: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: 20,),
-            Container(
-              height: sizeof.size.height * 0.5,
-              width: sizeof.size.width*0.3,
-              color: Colors.black,
-            ),
-          ],
-        ),
-      ),
-    );
+        backgroundColor: appbarColor,
+        centerTitle: true,
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back_ios)),
+        title: Text(
+          "My Details",
+          style: heading(20),
+        ));
   }
 }

@@ -1,7 +1,20 @@
- import 'package:bake_n_cake_user_side/style/text_style.dart';
+import 'package:bake_n_cake_user_side/controller/user_controller.dart';
+import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:flutter/material.dart';
 
-Card homeCard(MediaQueryData sizeof) {
+import 'package:get/get.dart';
+
+Card homeCard(MediaQueryData sizeof, int index) {
+  final UserController controller = Get.find<UserController>();
+
+  if (controller.productslist.isEmpty) {
+    // Handle empty state or display a placeholder
+    return Card();
+  }
+
+  // Check if the index is within the bounds of the productslist
+  if (index < controller.productslist.length) {
+    final product = controller.productslist[index];
     return Card(
       child: Column(
         children: [
@@ -21,18 +34,15 @@ Card homeCard(MediaQueryData sizeof) {
               SizedBox(
                 width: sizeof.size.width * 0.03,
               ),
-              Expanded(
-                child: Text(
-                  "Cake",
-                  style: normalstyling(15),
-                ),
+              Text(
+                product.name,
+                style: normalstyling(15),
               ),
-            
             ],
           ),
-            SizedBox(
-                width: sizeof.size.height * 0.04,
-              ),
+          SizedBox(
+            width: sizeof.size.height * 0.04,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,7 +51,7 @@ Card homeCard(MediaQueryData sizeof) {
               ),
               Expanded(
                 child: Text(
-                  "Price",
+                  "Price: ${product.price}",
                   style: normalstyling(15),
                 ),
               ),
@@ -50,4 +60,8 @@ Card homeCard(MediaQueryData sizeof) {
         ],
       ),
     );
+  } else {
+    // Handle out-of-bounds index
+    return Card();
   }
+}

@@ -1,9 +1,11 @@
 import 'package:bake_n_cake_user_side/controller/navigatoion_controller.dart';
+import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/view/cart/cart_page.dart';
 import 'package:bake_n_cake_user_side/view/home/home_page.dart';
 import 'package:bake_n_cake_user_side/view/profile/profile_page.dart';
 import 'package:bake_n_cake_user_side/view/profile/profile_page_app_bar.dart';
 import 'package:bake_n_cake_user_side/view/search/search_page.dart';
+import 'package:bake_n_cake_user_side/view/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +27,7 @@ class LandingPage extends StatelessWidget {
             showSelectedLabels: false,
             onTap: landingPageController.changeTabIndex,
             currentIndex: landingPageController.tabIndex.value,
-            backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+            backgroundColor:navigation,
             unselectedItemColor: Colors.white.withOpacity(0.5),
             selectedItemColor: Colors.white,
             items: [
@@ -41,7 +43,7 @@ class LandingPage extends StatelessWidget {
                       )),
                 ),
                 label: '',
-                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: navigation
               ),
               BottomNavigationBarItem(
                 icon: Container(
@@ -55,13 +57,13 @@ class LandingPage extends StatelessWidget {
                       )),
                 ),
                 label: '',
-                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: navigation
               ),
               BottomNavigationBarItem(
                 icon: Container(
                   margin: const EdgeInsets.only(bottom: 7),
                   child: Obx(() => Icon(
-                        Icons.location_history,
+                        Icons.shopping_cart,
                         size: 20.0,
                         color: landingPageController.tabIndex.value == 2
                             ? Colors.white
@@ -69,7 +71,7 @@ class LandingPage extends StatelessWidget {
                       )),
                 ),
                 label: '',
-                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: navigation
               ),
               BottomNavigationBarItem(
                 icon: Container(
@@ -83,7 +85,7 @@ class LandingPage extends StatelessWidget {
                       )),
                 ),
                 label: '',
-                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: navigation
               ),
             ],
           ),
@@ -101,11 +103,11 @@ class LandingPage extends StatelessWidget {
       body: Obx(
         () => IndexedStack(
           index: landingPageController.tabIndex.value,
-          children: const [
+          children:  [
             HomeScreen(),
             SearchPage(),
             CartPage(),
-            ProfilePage()
+            Settings()
           ],
         ),
       ),

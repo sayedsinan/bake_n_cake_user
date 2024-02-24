@@ -5,13 +5,13 @@ import 'package:bake_n_cake_user_side/view/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Padding signupButton(MediaQueryData sizeof) {
+Padding forgotbutton(MediaQueryData sizeof) {
   final controller = Get.find<UserController>();
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: ElevatedButton(
       onPressed: () {
-        controller.signUp();
+        controller.reset();
         // Get.off(() => const HomeScreen());
       },
       style: ButtonStyle(
@@ -23,7 +23,7 @@ Padding signupButton(MediaQueryData sizeof) {
         ),
       ),
       child: Text(
-        "Sign Up",
+        "Send",
         style: headingSecondstyling(20),
       ),
     ),

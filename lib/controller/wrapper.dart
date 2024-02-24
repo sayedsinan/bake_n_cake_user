@@ -1,5 +1,7 @@
 import 'package:bake_n_cake_user_side/view/error/error_page.dart';
 import 'package:bake_n_cake_user_side/view/home/home_page.dart';
+import 'package:bake_n_cake_user_side/view/login/login_page.dart';
+import 'package:bake_n_cake_user_side/view/navigationbar/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +20,9 @@ class _WrapperState extends State<Wrapper> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return LandingPage();
           } else {
-            return const ErrorPage();
+            return const Login();
           }
         },
       ),

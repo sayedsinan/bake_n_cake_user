@@ -10,3 +10,4 @@ Color delete = Colors.red;
 Color secondColor = Colors.white;
 Color style = Colors.grey;
 Color contaienerColor = const Color(0xFFD9D9D9);
+Color navigation = Color(0xFF81BFBC);
