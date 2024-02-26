@@ -16,7 +16,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<UserController>();
+    // final controller = Get.find<UserController>();
     var sizeof = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: maincolor,

@@ -1,7 +1,7 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
-import 'package:bake_n_cake_user_side/view/home/home_page.dart';
+
 import 'package:bake_n_cake_user_side/view/navigationbar/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

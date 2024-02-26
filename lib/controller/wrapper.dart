@@ -1,5 +1,3 @@
-import 'package:bake_n_cake_user_side/view/error/error_page.dart';
-import 'package:bake_n_cake_user_side/view/home/home_page.dart';
 import 'package:bake_n_cake_user_side/view/login/login_page.dart';
 import 'package:bake_n_cake_user_side/view/navigationbar/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';

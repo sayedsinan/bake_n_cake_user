@@ -39,7 +39,7 @@ class ProductView extends StatelessWidget {
                       width: sizeof.size.width * 0.3,
                       child: Center(
                           child: Text(
-                        controller.productslist[index].price.toString(),
+                         "₹ ${controller.productslist[index].price}",
                         style: normalstyling(25),
                       )),
                     ),

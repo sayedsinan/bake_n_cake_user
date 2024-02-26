@@ -16,7 +16,7 @@ class SettingsAppbar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
               radius: 25, // Increase the radius for a larger CircleAvatar
-              backgroundImage: AssetImage('path_to_your_image'), // Optionally provide a backgroundImage
+              backgroundImage: AssetImage(''), // Optionally provide a backgroundImage
             ),
           ),
           Column(

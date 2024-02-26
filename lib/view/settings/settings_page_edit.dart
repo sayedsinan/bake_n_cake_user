@@ -1,4 +1,6 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
+import 'package:bake_n_cake_user_side/view/favorite/faviorite_page.dart';
+import 'package:bake_n_cake_user_side/view/profile/myDetails.dart';
 import 'package:bake_n_cake_user_side/view/profile/profile_page.dart';
 import 'package:bake_n_cake_user_side/view/settings/settigns_appbar.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +26,10 @@ class Settings extends StatelessWidget {
                   bottom: sizeof.size.height * 0.02,
                   top: sizeof.size.height * 0.02),
               child: InkWell(
-onTap:(){
-  Get.to(ProfilePage());
-}
-             ,   child: ListTile(
+                onTap: () {
+                  Get.to(MyDetails());
+                },
+                child: ListTile(
                   leading: Icon(Icons.person),
                   title: Text("Personal Info"),
                   trailing: Icon(Icons.arrow_forward_ios_sharp),
@@ -67,10 +69,15 @@ onTap:(){
               padding: EdgeInsets.only(
                   bottom: sizeof.size.height * 0.02,
                   top: sizeof.size.height * 0.02),
-              child: ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Invite a Friend"),
-                trailing: Icon(Icons.arrow_forward_ios_sharp),
+              child: InkWell(
+                onTap: () {
+                  Get.to(FavioratePage());
+                },
+                child: ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text("Favorite"),
+                  trailing: Icon(Icons.arrow_forward_ios_sharp),
+                ),
               ),
             ),
             Divider(

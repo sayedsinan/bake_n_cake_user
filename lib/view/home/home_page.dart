@@ -2,7 +2,6 @@ import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/home/appbar.dart';
-import 'package:bake_n_cake_user_side/view/home/my_card.dart';
 import 'package:bake_n_cake_user_side/view/productView/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,12 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: sizeof.size.height * 0.119,
                                     color: Colors.black,
                                     child: SizedBox(
-                                      width: sizeof.size.width * 1,
+                                        width: sizeof.size.width * 1,
                                         child: Image.network(
-                                      controller.productslist[index].image
-                                          .toString(),
-                                      fit: BoxFit.cover,
-                                    )),
+                                          controller.productslist[index].image
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                        )),
                                   ),
                                 ),
                                 Row(
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        controller.productslist[index].price
+                                        "₹ ${controller.productslist[index].price}"
                                             .toString(),
                                         style: normalstyling(15),
                                       ),

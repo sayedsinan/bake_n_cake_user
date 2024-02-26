@@ -1,18 +1,15 @@
-import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
-
+import 'package:bake_n_cake_user_side/view/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Padding forgotbutton(MediaQueryData sizeof) {
-  final controller = Get.find<UserController>();
+Padding editbutton(MediaQueryData sizeof) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: ElevatedButton(
       onPressed: () {
-        controller.reset();
-        // Get.off(() => const HomeScreen());
+        Get.to(ProfilePage());
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
@@ -23,8 +20,8 @@ Padding forgotbutton(MediaQueryData sizeof) {
         ),
       ),
       child: Text(
-        "Send",
-        style: headingSecondstyling(20),
+        "Click to Edit",
+        style: heading(15),
       ),
     ),
   );

@@ -3,13 +3,13 @@ import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfilePageAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ProfilePageAppBar extends StatelessWidget   {
   const ProfilePageAppBar({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(200);
+
   Widget build(BuildContext context) {
-    var sizeof = MediaQuery.of(context);
+    
     return AppBar(
         backgroundColor: appbarColor,
         centerTitle: true,
