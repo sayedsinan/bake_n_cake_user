@@ -78,8 +78,11 @@ class ProductView extends StatelessWidget {
                               child: Center(
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.shopping_cart,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 3),
+                                      child: Icon(
+                                        Icons.shopping_cart,
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 10,
@@ -102,8 +105,11 @@ class ProductView extends StatelessWidget {
                             child: Center(
                               child: Row(
                                 children: [
-                                  Text("Buy now",
-                                      style: normalsecondStyling(15)),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Text("Buy now",
+                                        style: normalsecondStyling(15)),
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),

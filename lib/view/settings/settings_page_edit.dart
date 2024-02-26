@@ -1,4 +1,5 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
+import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/favorite/faviorite_page.dart';
 import 'package:bake_n_cake_user_side/view/profile/myDetails.dart';
 import 'package:bake_n_cake_user_side/view/profile/profile_page.dart';
@@ -71,11 +72,11 @@ class Settings extends StatelessWidget {
                   top: sizeof.size.height * 0.02),
               child: InkWell(
                 onTap: () {
-                  Get.to(FavioratePage());
+                  Get.to(() => const FavioratePage());
                 },
                 child: ListTile(
                   leading: Icon(Icons.favorite),
-                  title: Text("Favorite"),
+                  title: Text("Favorite", style: normalstyling(15) ),
                   trailing: Icon(Icons.arrow_forward_ios_sharp),
                 ),
               ),

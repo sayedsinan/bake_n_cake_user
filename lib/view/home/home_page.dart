@@ -100,6 +100,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style: normalstyling(15),
                                       ),
                                     ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Check if the item is in favorites
+                                        bool isFavorite = controller.isFavorite(
+                                            controller.productslist[index]);
+
+                                        // If it is in favorites, remove it; otherwise, add it
+                                        if (isFavorite) {
+                                          controller.removefromfav(
+                                              controller.productslist[index]);
+                                        } else {
+                                          controller.addtofavorite(
+                                              controller.productslist[index]);
+                                        }
+                                      },
+                                      child: Obx(() {
+                                        bool isFavorite = controller.isFavorite(
+                                            controller.productslist[index]);
+
+                                        return Icon(
+                                          isFavorite
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: isFavorite
+                                              ? Colors.red
+                                              : Colors.black,
+                                        );
+                                      }),
+                                    )
                                   ],
                                 )
                               ],
