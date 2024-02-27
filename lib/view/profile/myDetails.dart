@@ -46,34 +46,15 @@ class MyDetails extends StatelessWidget {
             return Column(
               children: [
                 SizedBox(height: sizeof.size.height * 0.07),
-                Padding(
-  padding: const EdgeInsets.only(left: 60, right: 60),
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-    child: InkWell(
-      onTap: () async {
-        final ImagePicker _picker = ImagePicker();
-        final XFile? image = await _picker.pickImage(
-          source: ImageSource.gallery,
-        );
-
-        if (image != null) {
-          await controller.updateProfileImageUrl(image.path);
-        }
-      },
-      child: Container(
-        height: sizeof.size.height * 0.27,
-        width: sizeof.size.width * 0.6,
-        child: Obx(() {
-          return Image.network(
-            controller.profileImageUrl.value,
-            fit: BoxFit.cover, // You can choose the fit you want
-          );
-        }),
-      ),
-    ),
-  ),
-),
+                   controller.img != null
+                          ? CircleAvatar(
+                              radius: 64,
+                              backgroundImage: MemoryImage(controller.img!),
+                            )
+                          : CircleAvatar(
+                              radius: 65,
+                              backgroundImage: NetworkImage(''),
+                            ),
                 SizedBox(
                   height: sizeof.size.height * 0.03,
                 ),
@@ -97,7 +78,7 @@ class MyDetails extends StatelessWidget {
                   title: Center(
                     child: Expanded(
                       child: Text(
-                        userData['mobileNumber'],
+                        userData['mobileNumber']??'add your number ',
                         style: normalstyling(20),
                       ),
                     ),
@@ -112,7 +93,7 @@ class MyDetails extends StatelessWidget {
                   title: Center(
                     child: Expanded(
                       child: Text(
-                        userData['address'],
+                        userData['address']??'add tyou address manually',
                         style: normalstyling(20),
                       ),
                     ),
@@ -127,7 +108,7 @@ class MyDetails extends StatelessWidget {
                   title: Center(
                     child: Expanded(
                       child: Text(
-                        userData['date of birth'],
+                        userData['date of birth']??'add your date',
                         style: normalstyling(20),
                       ),
                     ),

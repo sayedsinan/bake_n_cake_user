@@ -1,18 +1,20 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:bake_n_cake_user_side/view/navigationbar/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bake_n_cake_user_side/model/prodcuts.dart';
-import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {
-    TextEditingController usernameController=TextEditingController();
-   TextEditingController mobileNumberController=TextEditingController();
-   TextEditingController addressController=TextEditingController();
-   TextEditingController dobController=TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController mobileNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController dobController = TextEditingController();
 
   TextEditingController loginName = TextEditingController();
   TextEditingController loginPassword = TextEditingController();
@@ -25,8 +27,48 @@ class UserController extends GetxController {
   RxList<ProductModel> favoriteItems = <ProductModel>[].obs;
   RxList<ProductModel> originalProductsList = <ProductModel>[].obs;
   final userCollection = FirebaseFirestore.instance.collection("Users");
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  final FirebaseStorage storage = FirebaseStorage.instance;
   final currentUser = FirebaseAuth.instance.currentUser;
-    var profileImageUrl = ''.obs;
+  Uint8List? img;
+  RxInt increment = 1.obs;
+  void productincrement() {
+    increment++;
+  }
+
+  Future<String> uploadImageToStorage(String childname, Uint8List file) async {
+    Reference ref = storage.ref().child(childname);
+    UploadTask uploadTask = ref.putData(file);
+    TaskSnapshot snapshot = await uploadTask;
+    String download = await snapshot.ref.getDownloadURL();
+    return download;
+  }
+
+  saveimage() async {
+ final resp = await savePhoto(image: img!);
+
+  }
+
+  Future<String> savePhoto({
+    required Uint8List image,
+  }) async {
+    String resp = "Some error";
+    try {
+      String imageUrl = await uploadImageToStorage('profileimage', image);
+      // Use collection and add methods to access Firestore collection
+      await firestore.collection('Users').add({'imageLink': imageUrl});
+      resp = 'success';
+    } catch (e) {
+      resp = e.toString();
+    }
+    return resp;
+  }
+
+  void decrement() {
+    increment--;
+  }
+
   signout() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -37,31 +79,20 @@ class UserController extends GetxController {
       password: loginPassword.text,
     );
   }
- Future<String> updateProfileImageUrl(String profileImageUrl) async {
-  try {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    final docRef = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid);
 
-    // Get the current document data before updating
-    final DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
-
-    // Update the profileImageUrl field
-    await docRef.update({'profileImageUrl': profileImageUrl});
-
-    // Get the updated profileImageUrl from the document snapshot
-    final updatedData = docSnapshot.data();
-    final updatedProfileImageUrl = updatedData?['profileImageUrl'] as String;
-
-    // Return the updated profile image URL
-    return updatedProfileImageUrl;
-  } catch (e) {
-    print('Error updating profile image URL: $e');
-    // Return null or an empty string in case of an error
-    return '';
+  pickImage(ImageSource source) async {
+    final ImagePicker imagePicker = ImagePicker();
+    XFile? file = await imagePicker.pickImage(source: source);
+    if (file != null) {
+      return await file.readAsBytes();
+    }
+    print('');
   }
-}
+
+  void selectImage() async {
+    Uint8List _img = await pickImage(ImageSource.gallery);
+    img = _img;
+  }
 
   signUp() async {
     try {
@@ -78,7 +109,8 @@ class UserController extends GetxController {
         'username': signupEmail.text.split("@")[0],
         'mobileNumber': 'empty',
         'address': '',
-        'date of birth': ''
+        'date of birth': '',
+        'image': ''
       });
 
       Get.offAll(LandingPage());
@@ -123,7 +155,8 @@ class UserController extends GetxController {
   void addtofavorite(ProductModel product) {
     favoriteItems.add(product);
   }
-   bool isFavorite(ProductModel product) {
+
+  bool isFavorite(ProductModel product) {
     return favoriteItems.contains(product);
   }
 

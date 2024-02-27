@@ -17,7 +17,7 @@ AppBar appbar(MediaQueryData sizeof) {
             color: secondColor,
           ),
           // SizedBox(width: sizeof.size.width*0.01,),
-          Text("Back",style: normalstyling(15),)
+         
         ],
       ),
     );

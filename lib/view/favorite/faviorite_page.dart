@@ -1,6 +1,8 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
+import 'package:bake_n_cake_user_side/view/favorite/favoriteAppbar.dart';
+import 'package:bake_n_cake_user_side/view/favorite/my_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,43 +11,24 @@ class FavioratePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller=Get.find<UserController>();
     return Scaffold(
         backgroundColor: maincolor,
-        appBar: AppBar(
-            leading: Icon(
-              Icons.arrow_back_ios,
-            ),
-            centerTitle: true,
-            title: Text(
-              "Favorite",
-              style: heading(20),
-            ),
-            backgroundColor: maincolor,
-            elevation: 0),
-        body: SingleChildScrollView(
-          child: Column(
+        appBar: favoriteAppbar(),
+        body: GetBuilder<UserController>(builder: (controller) {
+          return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: ListView.builder(
-                  itemCount:controller.favoriteItems.length ,
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.favoriteItems.length,
                   itemBuilder: (context, index) {
-                  return ListTile(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    tileColor: Colors.white,
-                    leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            controller.favoriteItems[index].image.toString()),
-                      ),
-                    title: Expanded(child: Text(controller.favoriteItems[index].name,)),
-                    trailing: Icon(Icons.favorite_border),
-                  );
-                }), 
-              )
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: myTile(controller, index),
+                    );
+                  })
             ],
-          ),
-        ));
+          );
+        }));
   }
+
 }

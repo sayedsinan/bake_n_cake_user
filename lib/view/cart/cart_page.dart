@@ -76,8 +76,8 @@ class CartPage extends StatelessWidget {
                                 ),
                               ),
                               child: Center(
-                                child: const Text(
-                                  "1",
+                                child:  Text(
+                                  controller.increment.toString(),
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,

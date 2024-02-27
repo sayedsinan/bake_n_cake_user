@@ -2,6 +2,8 @@ import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/home/appbar.dart';
+import 'package:bake_n_cake_user_side/view/home/favoriteICon.dart';
+import 'package:bake_n_cake_user_side/view/home/my_card.dart';
 import 'package:bake_n_cake_user_side/view/productView/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,92 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           left: 20, right: 20, top: 10, bottom: 10),
                       child: GestureDetector(
                           onTap: () => Get.to(ProductView(index)),
-                          child: Card(
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                  ),
-                                  child: Container(
-                                    height: sizeof.size.height * 0.119,
-                                    color: Colors.black,
-                                    child: SizedBox(
-                                        width: sizeof.size.width * 1,
-                                        child: Image.network(
-                                          controller.productslist[index].image
-                                              .toString(),
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: sizeof.size.width * 0.03,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        controller.productslist[index].name,
-                                        style: normalstyling(15),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: sizeof.size.height * 0.04,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: sizeof.size.width * 0.03,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        "₹ ${controller.productslist[index].price}"
-                                            .toString(),
-                                        style: normalstyling(15),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        // Check if the item is in favorites
-                                        bool isFavorite = controller.isFavorite(
-                                            controller.productslist[index]);
-
-                                        // If it is in favorites, remove it; otherwise, add it
-                                        if (isFavorite) {
-                                          controller.removefromfav(
-                                              controller.productslist[index]);
-                                        } else {
-                                          controller.addtofavorite(
-                                              controller.productslist[index]);
-                                        }
-                                      },
-                                      child: Obx(() {
-                                        bool isFavorite = controller.isFavorite(
-                                            controller.productslist[index]);
-
-                                        return Icon(
-                                          isFavorite
-                                              ? Icons.favorite
-                                              : Icons.favorite_border,
-                                          color: isFavorite
-                                              ? Colors.red
-                                              : Colors.black,
-                                        );
-                                      }),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          )));
+                          child: myCard(sizeof, index)));
                 });
           },
         ));
   }
+
+ 
+
+ 
 }

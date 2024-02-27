@@ -39,7 +39,7 @@ class ProductView extends StatelessWidget {
                       width: sizeof.size.width * 0.3,
                       child: Center(
                           child: Text(
-                         "₹ ${controller.productslist[index].price}",
+                        "₹ ${controller.productslist[index].price}",
                         style: normalstyling(25),
                       )),
                     ),
@@ -47,7 +47,128 @@ class ProductView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: sizeof.size.height * 0.05,
+                height: sizeof.size.height * 0.02,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(
+                        0), // Adjust the padding to make the Container smaller
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Colors.black), // Define a border
+                      borderRadius: BorderRadius.circular(
+                          4.0), // Optional: Add border radius for a rounded look
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          controller.decrement();
+                        },
+                        child: Icon(
+                          Icons.minimize,
+                          size:
+                              30, // Set the size of the icon inside the IconButton
+                          color: Colors
+                              .black, // Adjust the color of the icon as needed
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(controller.increment.toString()),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(
+                        0), // Adjust the padding to make the Container smaller
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Colors.black), // Define a border
+                      borderRadius: BorderRadius.circular(
+                          4.0), // Optional: Add border radius for a rounded look
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          controller.productincrement();
+                        },
+                        child: Icon(
+                          Icons.add,
+                          size:
+                              30, // Set the size of the icon inside the IconButton
+                          color: Colors
+                              .black, // Adjust the color of the icon as needed
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: sizeof.size.width*0.3,),
+                  Container(
+                    padding: EdgeInsets.all(
+                        0), // Adjust the padding to make the Container smaller
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Colors.black), // Define a border
+                      borderRadius: BorderRadius.circular(
+                          4.0), // Optional: Add border radius for a rounded look
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          controller.decrement();
+                        },
+                        child: Icon(
+                          Icons.minimize,
+                          size:
+                              30, // Set the size of the icon inside the IconButton
+                          color: Colors
+                              .black, // Adjust the color of the icon as needed
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(controller.increment.toString()),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(
+                        0), // Adjust the padding to make the Container smaller
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Colors.black), // Define a border
+                      borderRadius: BorderRadius.circular(
+                          4.0), // Optional: Add border radius for a rounded look
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          controller.productincrement();
+                        },
+                        child: Icon(
+                          Icons.add,
+                          size:
+                              30, // Set the size of the icon inside the IconButton
+                          color: Colors
+                              .black, // Adjust the color of the icon as needed
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: sizeof.size.height * 0.02,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,15 +182,16 @@ class ProductView extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: InkWell(
-                          onTap: (){
-                             controller.addToCart(controller.productslist[index]);
-                              Get.snackbar(
-                            'Added to Cart',
-                            'The product has been added to the cart.',
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.black,
-                            colorText: Colors.white,
-                          );
+                          onTap: () {
+                            controller
+                                .addToCart(controller.productslist[index]);
+                            Get.snackbar(
+                              'Added to Cart',
+                              'The product has been added to the cart.',
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.black,
+                              colorText: Colors.white,
+                            );
                           },
                           child: Container(
                               color: Colors.grey[400],
@@ -134,7 +256,7 @@ class ProductView extends StatelessWidget {
                 height: 10,
               ),
               Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(controller.productslist[index].description),
                 ],
@@ -145,7 +267,7 @@ class ProductView extends StatelessWidget {
   }
 
   Row cakename() {
-        final controller = Get.find<UserController>();
+    final controller = Get.find<UserController>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +281,7 @@ class ProductView extends StatelessWidget {
   }
 
   Row image(MediaQueryData sizeof) {
-        final controller = Get.find<UserController>();
+    final controller = Get.find<UserController>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +290,7 @@ class ProductView extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: SizedBox(
               child: Image.network(
-              controller.productslist[index].image.toString(),
+                controller.productslist[index].image.toString(),
                 fit: BoxFit.fill,
               ),
               height: sizeof.size.height * 0.45,

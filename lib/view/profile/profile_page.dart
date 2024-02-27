@@ -1,11 +1,11 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
-import 'package:bake_n_cake_user_side/view/profile/profile_page_app_bar.dart';
 import 'package:bake_n_cake_user_side/view/profile/profile_save.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -51,7 +51,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final controller = Get.find<UserController>();
     var sizeof = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: maincolor,
+      ),
       backgroundColor: maincolor,
       body: SingleChildScrollView(
         child: StreamBuilder<DocumentSnapshot>(
@@ -60,31 +62,32 @@ class _ProfilePageState extends State<ProfilePage> {
                 .doc(currentUser?.email)
                 .snapshots(),
             builder: (context, snapshot) {
-              // if (snapshot.hasData && currentUser != null) {
-              // final userData =
-              //     snapshot.data!.data() as Map<String, dynamic>;
-              // Check if the user data contains the key before assigning
-              // if (userData.containsKey('username')) {
-              //   usernameController.text = userData['username'];
-              // }
-              // if (userData.containsKey('mobileNumber')) {
-              //   mobileNumberController.text = userData['mobileNumber'];
-              // }
-              // if (userData.containsKey('address')) {
-              //   addressController.text = userData['address'];
-              // }
-              // if (userData.containsKey('date of birth')) {
-              //   dobController.text = userData['date of birth'];
-              // }
+             
               return Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      height: sizeof.size.height * 0.27,
-                      width: sizeof.size.width * 0.5,
-                      color: Colors.amber,
-                    ),
+                  Stack(
+                    children: [
+                      controller.img != null
+                          ? CircleAvatar(
+                              radius: 64,
+                              backgroundImage: MemoryImage(controller.img!),
+                            )
+                          : CircleAvatar(
+                              radius: 65,
+                              backgroundImage: NetworkImage(''),
+                            ),
+                      Positioned(
+                          child: IconButton(
+                            onPressed: () {
+                              controller.selectImage();
+                            },
+                            icon: Icon(
+                              Icons.add_a_photo,
+                            ),
+                          ),
+                          bottom: -10,
+                          left: 80)
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(30),
@@ -152,14 +155,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   profileSave(sizeof)
                 ],
               );
-              // } else if (snapshot.hasError) {
-              //   return Center(
-              //     child: Text("Error"),
-              //   );
-              // }
-              // return Center(
-              //   child: CircularProgressIndicator(),
-              // );
             }),
       ),
     );
