@@ -87,7 +87,7 @@ class ProductView extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.all(
-                        0), // Adjust the padding to make the Container smaller
+                        0), 
                     decoration: BoxDecoration(
                       border:
                           Border.all(color: Colors.black), // Define a border
@@ -122,7 +122,7 @@ class ProductView extends StatelessWidget {
                     child: Center(
                       child: InkWell(
                         onTap: () {
-                          controller.decrement();
+                          controller.kgdecrement();
                         },
                         child: Icon(
                           Icons.minimize,
@@ -137,7 +137,7 @@ class ProductView extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(controller.increment.toString()),
+                  Text(controller.kilo.toString()),
                   SizedBox(
                     width: 10,
                   ),
@@ -153,7 +153,7 @@ class ProductView extends StatelessWidget {
                     child: Center(
                       child: InkWell(
                         onTap: () {
-                          controller.productincrement();
+                          controller.kgincrement();
                         },
                         child: Icon(
                           Icons.add,

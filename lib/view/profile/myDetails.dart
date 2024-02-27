@@ -21,12 +21,10 @@ class MyDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: appbarColor,
         centerTitle: true,
-        title: Center(
-          child: Text(
-            "My Details",
-            style: heading(
-              20,
-            ),
+        title: Text(
+          "My Details",
+          style: heading(
+            20,
           ),
         ),
       ),

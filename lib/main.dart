@@ -1,4 +1,5 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
+import 'package:bake_n_cake_user_side/controller/wrapper.dart';
 import 'package:bake_n_cake_user_side/firebase_options.dart';
 import 'package:bake_n_cake_user_side/view/login/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Wrapper(),
     );
   }
 }

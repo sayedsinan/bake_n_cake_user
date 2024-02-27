@@ -99,7 +99,7 @@ class CartPage extends StatelessWidget {
                               width: 43,
                               child: Center(
                                 child: Text(
-                                  "0.5 KG",
+                                   "${controller.kilo.toString()} KG",
                                   style: normalstyling(12),
                                 ),
                               ),

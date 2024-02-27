@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:bake_n_cake_user_side/view/login/login_page.dart';
 import 'package:bake_n_cake_user_side/view/navigationbar/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,6 +34,7 @@ class UserController extends GetxController {
   final currentUser = FirebaseAuth.instance.currentUser;
   Uint8List? img;
   RxInt increment = 1.obs;
+  RxInt kilo = 1.obs;
   void productincrement() {
     increment++;
   }
@@ -46,8 +48,15 @@ class UserController extends GetxController {
   }
 
   saveimage() async {
- final resp = await savePhoto(image: img!);
+    final resp = await savePhoto(image: img!);
+  }
 
+  void kgincrement() {
+    kilo++;
+  }
+
+  void kgdecrement() {
+    kilo--;
   }
 
   Future<String> savePhoto({
@@ -71,6 +80,7 @@ class UserController extends GetxController {
 
   signout() async {
     await FirebaseAuth.instance.signOut();
+    Get.to(Login());
   }
 
   signInwithField() async {

@@ -3,6 +3,7 @@ import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/favorite/favoriteAppbar.dart';
 import 'package:bake_n_cake_user_side/view/favorite/my_tile.dart';
+import 'package:bake_n_cake_user_side/view/productView/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +24,11 @@ class FavioratePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(20),
-                      child: myTile(controller, index),
+                      child: InkWell(
+                        onTap:(){
+                          Get.to(ProductView(index));
+                        },
+                        child: myTile(controller, index)),
                     );
                   })
             ],

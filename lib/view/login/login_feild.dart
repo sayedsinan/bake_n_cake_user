@@ -38,6 +38,7 @@ Column login() {
       Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
         child: TextField(
+          obscureText: true,
           controller: controller.loginPassword,
           decoration: InputDecoration(
               labelText: 'Password',

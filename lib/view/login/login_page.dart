@@ -14,7 +14,6 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     var sizeof = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: maincolor,
