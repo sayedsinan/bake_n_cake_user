@@ -6,17 +6,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bake_n_cake_user_side/model/prodcuts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 class UserController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController dobController = TextEditingController();
-
   TextEditingController loginName = TextEditingController();
   TextEditingController loginPassword = TextEditingController();
   TextEditingController assurePassword = TextEditingController();
@@ -29,12 +27,20 @@ class UserController extends GetxController {
   RxList<ProductModel> originalProductsList = <ProductModel>[].obs;
   final userCollection = FirebaseFirestore.instance.collection("Users");
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
   final FirebaseStorage storage = FirebaseStorage.instance;
   final currentUser = FirebaseAuth.instance.currentUser;
   Uint8List? img;
   RxInt increment = 1.obs;
   RxInt kilo = 1.obs;
+
+
+
+  void selectDate(DateTime selectedDate) {
+    final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+    dobController.text = formattedDate;
+  }
+
+
   void productincrement() {
     increment++;
   }
@@ -65,7 +71,6 @@ class UserController extends GetxController {
     String resp = "Some error";
     try {
       String imageUrl = await uploadImageToStorage('profileimage', image);
-      // Use collection and add methods to access Firestore collection
       await firestore.collection('Users').add({'imageLink': imageUrl});
       resp = 'success';
     } catch (e) {
@@ -80,7 +85,7 @@ class UserController extends GetxController {
 
   signout() async {
     await FirebaseAuth.instance.signOut();
-    Get.to(Login());
+    Get.to(()=> const Login());
   }
 
   signInwithField() async {
@@ -96,12 +101,12 @@ class UserController extends GetxController {
     if (file != null) {
       return await file.readAsBytes();
     }
-    print('');
+    print('$source');
   }
 
   void selectImage() async {
-    Uint8List _img = await pickImage(ImageSource.gallery);
-    img = _img;
+    Uint8List img1 = await pickImage(ImageSource.gallery);
+    img = img1;
   }
 
   signUp() async {

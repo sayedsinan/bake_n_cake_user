@@ -2,7 +2,6 @@ import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/favorite/faviorite_page.dart';
 import 'package:bake_n_cake_user_side/view/profile/myDetails.dart';
-import 'package:bake_n_cake_user_side/view/profile/profile_page.dart';
 import 'package:bake_n_cake_user_side/view/settings/settigns_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
