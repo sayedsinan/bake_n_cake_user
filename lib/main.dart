@@ -1,17 +1,20 @@
+import 'package:bake_n_cake_user_side/controller/meseage_controller.dart';
+import 'package:bake_n_cake_user_side/controller/payment_controller.dart';
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/controller/wrapper.dart';
 import 'package:bake_n_cake_user_side/firebase_options.dart';
-import 'package:bake_n_cake_user_side/view/login/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Get.put(UserController());
+  Get.put(MesseageController());
+  Get.put(PaymentController());
   runApp(const MyApp());
 }
 

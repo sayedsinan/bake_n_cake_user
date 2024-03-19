@@ -2,35 +2,41 @@ import 'package:bake_n_cake_user_side/combonents/my_text_field.dart';
 import 'package:bake_n_cake_user_side/model/messeage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class MesseageController extends GetxController {
   final TextEditingController message = TextEditingController();
-
+  final String recier = 'vLViiYKBWCfBx7xYI10Vhh6QIjg2';
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth fireAut = FirebaseAuth.instance;
-  Future<void> sendMesseage(String reciverId, String message) async {
-    final String currentUserId = fireAut.currentUser!.uid;
-    final String currentUserEmail = fireAut.currentUser!.email.toString();
-    final Timestamp timestamp = Timestamp.now();
-    Messeage newMessage = Messeage(
-      senderUserId: currentUserId,
-      senderEmail: currentUserEmail,
-      reciverId: reciverId,
-      messeage: message,
-      time: timestamp,
-    );
-    List<String> ids = [currentUserId, reciverId];
-    ids.sort();
-    String chatroomId = ids.join("_");
-    await firestore
-        .collection('chat_rooms')
-        .doc(chatroomId)
-        .collection('messages')
-        .add(newMessage.toMap());
+ Future<void> sendMesseage(String receiverId, String message) async {
+  final String currentUserId = fireAut.currentUser!.uid;
+  final String currentUserEmail = fireAut.currentUser!.email.toString();
+  final Timestamp timestamp = Timestamp.now();
+  Messeage newMessage = Messeage(
+    senderUserId: currentUserId,
+    senderEmail: currentUserEmail,
+    reciverId: receiverId,
+    messeage: message,
+    time: timestamp,
+  );
+  List<String> ids = [currentUserId, receiverId];
+  ids.sort();
+  String chatroomId = ids.join("_");
+
+  // Check if the chat room exists
+  var chatRoomRef = firestore.collection('chat_rooms').doc(chatroomId);
+  var chatRoomSnapshot = await chatRoomRef.get();
+
+  if (!chatRoomSnapshot.exists) {
+    // Create the chat room if it doesn't exist
+    await chatRoomRef.set({}); // You can add additional data to the chat room here if needed
   }
+
+  // Add the message to the chat room
+  await chatRoomRef.collection('messages').add(newMessage.toMap());
+}
 
   Stream<QuerySnapshot> getMesseage(String userId, String otherUserId) {
     List<String> ids = [userId, otherUserId];
@@ -46,12 +52,12 @@ class MesseageController extends GetxController {
 
   void sendMessage() async {
     if (message.text.isNotEmpty) {
-      await sendMesseage('receiverId', message.text);
+      await sendMesseage(recier, message.text);
       message.clear();
     }
   }
 
-   Widget builtMesseageInput() {
+  Widget builtMesseageInput() {
     return Row(
       children: [
         Expanded(
@@ -65,5 +71,62 @@ class MesseageController extends GetxController {
       ],
     );
   }
+    Widget buildeMesseageList() {
+    return StreamBuilder(
+      stream: getMesseage(recier, fireAut.currentUser!.uid),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        }
 
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (!snapshot.hasData) {
+          return Text("No data available");
+        }
+
+        
+        QuerySnapshot querySnapshot = snapshot.data as QuerySnapshot;
+
+     
+        List<DocumentSnapshot> docs = querySnapshot.docs;
+
+        // Build a ListView with the document data
+        return ListView.builder(
+          itemCount: docs.length,
+          itemBuilder: (BuildContext context, int index) {
+            // Access the document data for each document
+            Map<String, dynamic> data =
+                docs[index].data() as Map<String, dynamic>;
+
+            // Use the data to build a custom widget, for example a ListTile
+            return ListTile(
+              title: Text(data[
+                  'messages']), // Assuming 'message' is a field in the document
+            );
+          },
+        );
+      },
+    );
+  }
+    Widget builtMessageItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+    var alignment = (data['senderId'] == fireAut.currentUser!.uid)
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
+    return Container(
+      alignment: alignment,
+      child: Column(
+        children: [
+          Text(data['senderEmail']),
+          Text(data['messages']),
+        ],
+      ),
+    );
+  }
 }

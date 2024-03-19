@@ -14,7 +14,7 @@ Padding button(MediaQueryData sizeof) {
     child: ElevatedButton(
       onPressed: () {
         controller.signInwithField();
-        Get.off(LandingPage());
+        
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(buttonColor),

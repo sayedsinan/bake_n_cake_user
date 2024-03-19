@@ -1,3 +1,4 @@
+import 'package:bake_n_cake_user_side/controller/payment_controller.dart';
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
@@ -13,7 +14,8 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var sizeof = MediaQuery.of(context);
     final controller = Get.find<UserController>();
-    // Define the list of cake names
+
+    // Calculate total sum
     double sum = 0.0;
     controller.cartItems.forEach((item) {
       sum += item.price;
@@ -36,8 +38,7 @@ class CartPage extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: controller
-                  .cartItems.length, // Use the actual number of cakes here
+              itemCount: controller.cartItems.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -76,7 +77,7 @@ class CartPage extends StatelessWidget {
                                 ),
                               ),
                               child: Center(
-                                child:  Text(
+                                child: Text(
                                   controller.increment.toString(),
                                   style: TextStyle(
                                     color: Colors.black,
@@ -99,7 +100,7 @@ class CartPage extends StatelessWidget {
                               width: 43,
                               child: Center(
                                 child: Text(
-                                   "${controller.kilo.toString()} KG",
+                                  "${controller.kilo.toString()} KG",
                                   style: normalstyling(12),
                                 ),
                               ),
@@ -119,7 +120,6 @@ class CartPage extends StatelessWidget {
                             onPressed: () {
                               int itemIndex = controller.cartItems
                                   .indexOf(controller.cartItems[index]);
-                              // Remove the item at the found index
                               controller.cartItems.removeAt(itemIndex);
                             },
                           ),
@@ -131,31 +131,6 @@ class CartPage extends StatelessWidget {
               },
             ),
 
-            // Second ListView.builder for displaying the cake names
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount:
-                  controller.cartItems.length, // Use the length of cakeNames
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        controller.cartItems[index].name,
-                        style: normalstyling(15),
-                      ),
-                      Text(
-                        controller.cartItems[index].price.toString(),
-                        style: normalstyling(15),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
             SizedBox(height: sizeof.size.height * 0.02),
             Divider(height: 12),
             Row(
@@ -172,10 +147,36 @@ class CartPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: sizeof.size.height * 0.1),
-            cartButton(sizeof)
+            // Pass sum to cartButton widget
+            cartButton(sizeof, sum),
           ],
         ),
       ),
     );
   }
 }
+
+// Define cartButton widget
+Widget cartButton(MediaQueryData sizeof, double totalAmount) {
+  final paymentController = Get.find<PaymentController>();
+  return ElevatedButton(
+    onPressed: () {
+      paymentController.openCheckout(totalAmount);
+      // paymentController.addOrder();
+    },
+    child: Text(
+      'Place Order',
+      style: TextStyle(fontSize: 18),
+    ),
+    style: ElevatedButton.styleFrom(
+      foregroundColor: Colors.white,
+      primary: Colors.black,
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+    ),
+  );
+}
+
+// Define handlePayment function

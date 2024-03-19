@@ -46,6 +46,7 @@ dependencies:
   date_format: ^2.0.7
   curved_navigation_bar: ^1.0.3
   firebase_messaging: ^14.7.17
+  razorpay_web: ^1.4.2
 
 dev_dependencies:
   flutter_test:

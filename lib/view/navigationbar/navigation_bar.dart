@@ -24,7 +24,7 @@ class _LandingPageState extends State<LandingPage> {
         key: _bottomNavigationKey,
         index: _page,
         height: 50.0,
-        items: <Widget>[
+        items: <Widget>  [
           Icon(Icons.home, size: 30),
           Icon(Icons.search, size: 30),
           Icon(Icons.shopping_cart, size: 30),
@@ -34,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
         buttonBackgroundColor: Colors.white,
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {
           setState(() {
             _page = index;

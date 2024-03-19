@@ -1,5 +1,6 @@
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
+import 'package:bake_n_cake_user_side/view/chat/chat.dart';
 import 'package:bake_n_cake_user_side/view/favorite/faviorite_page.dart';
 import 'package:bake_n_cake_user_side/view/profile/myDetails.dart';
 import 'package:bake_n_cake_user_side/view/settings/settigns_appbar.dart';
@@ -87,10 +88,15 @@ class Settings extends StatelessWidget {
               padding: EdgeInsets.only(
                   bottom: sizeof.size.height * 0.02,
                   top: sizeof.size.height * 0.02),
-              child: ListTile(
-                leading: Icon(Icons.chat_rounded),
-                title: Text("Chat support"),
-                trailing: Icon(Icons.arrow_forward_ios_sharp),
+              child: InkWell(
+                onTap: (){
+                  Get.to(const ChatPage());
+                },
+                child: ListTile(
+                  leading: Icon(Icons.chat_rounded),
+                  title: Text("Chat support"),
+                  trailing: Icon(Icons.arrow_forward_ios_sharp),
+                ),
               ),
             ),
             Divider(

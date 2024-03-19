@@ -162,6 +162,7 @@ class UserController extends GetxController {
       // print('Error fetching products: $e');
     }
   }
+  
 
   void addToCart(ProductModel product) {
     cartItems.add(product);
