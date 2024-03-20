@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
 class UserController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
@@ -23,8 +24,10 @@ class UserController extends GetxController {
   TextEditingController resetText = TextEditingController();
   RxList<ProductModel> productslist = <ProductModel>[].obs;
   RxList<ProductModel> cartItems = <ProductModel>[].obs;
+  RxList<ProductModel> myOrders = <ProductModel>[].obs;
   RxList<ProductModel> favoriteItems = <ProductModel>[].obs;
   RxList<ProductModel> originalProductsList = <ProductModel>[].obs;
+  RxList orderedProducts = [].obs;
   final userCollection = FirebaseFirestore.instance.collection("Users");
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
@@ -32,14 +35,13 @@ class UserController extends GetxController {
   Uint8List? img;
   RxInt increment = 1.obs;
   RxInt kilo = 1.obs;
-
-
+  final db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
 
   void selectDate(DateTime selectedDate) {
     final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
     dobController.text = formattedDate;
   }
-
 
   void productincrement() {
     increment++;
@@ -85,7 +87,7 @@ class UserController extends GetxController {
 
   signout() async {
     await FirebaseAuth.instance.signOut();
-    Get.to(()=> const Login());
+    Get.to(() => const Login());
   }
 
   signInwithField() async {
@@ -93,6 +95,14 @@ class UserController extends GetxController {
       email: loginName.text,
       password: loginPassword.text,
     );
+  }
+
+  Stream<QuerySnapshot> getOrderStream() {
+    // Stream to listen for changes in the user's orders
+    return FirebaseFirestore.instance
+        .collection('Orders')
+        .where('userId', isEqualTo: user!.uid)
+        .snapshots();
   }
 
   pickImage(ImageSource source) async {
@@ -107,6 +117,22 @@ class UserController extends GetxController {
   void selectImage() async {
     Uint8List img1 = await pickImage(ImageSource.gallery);
     img = img1;
+  }
+
+  Future<void> placeOrder(
+      String productName, String productWeight, String productImage) async {
+    try {
+      await FirebaseFirestore.instance.collection('Orders').add({
+        'productName': productName,
+        'productWeight': productWeight,
+        'productImage': productImage,
+        'date': DateTime.now(),
+        'userId': user!.uid,
+      });
+      print('Order placed successfully');
+    } catch (e) {
+      print("Error placing order: $e");
+    }
   }
 
   signUp() async {
@@ -162,7 +188,10 @@ class UserController extends GetxController {
       // print('Error fetching products: $e');
     }
   }
-  
+
+  void addToMyOrdres(ProductModel product) {
+    myOrders.add(product);
+  }
 
   void addToCart(ProductModel product) {
     cartItems.add(product);

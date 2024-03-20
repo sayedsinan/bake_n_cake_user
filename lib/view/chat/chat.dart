@@ -10,7 +10,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<MesseageController>();
+    // final controller = Get.find<MesseageController>();
     final secondcontroller = Get.find<MesseageController>();
 
     return Scaffold(

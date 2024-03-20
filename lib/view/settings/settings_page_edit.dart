@@ -2,6 +2,7 @@ import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
 import 'package:bake_n_cake_user_side/view/chat/chat.dart';
 import 'package:bake_n_cake_user_side/view/favorite/faviorite_page.dart';
+import 'package:bake_n_cake_user_side/view/orders/my_orders.dart';
 import 'package:bake_n_cake_user_side/view/profile/myDetails.dart';
 import 'package:bake_n_cake_user_side/view/settings/settigns_appbar.dart';
 import 'package:flutter/material.dart';
@@ -44,10 +45,15 @@ class Settings extends StatelessWidget {
               padding: EdgeInsets.only(
                   bottom: sizeof.size.height * 0.02,
                   top: sizeof.size.height * 0.02),
-              child: ListTile(
-                leading: Icon(Icons.add_box),
-                title: Text("My Orders"),
-                trailing: Icon(Icons.arrow_forward_ios_sharp),
+              child: InkWell(
+                onTap: () {
+                  Get.to(MyOrders());
+                },
+                child: ListTile(
+                  leading: Icon(Icons.add_box),
+                  title: Text("My Orders"),
+                  trailing: Icon(Icons.arrow_forward_ios_sharp),
+                ),
               ),
             ),
             Divider(
@@ -76,7 +82,7 @@ class Settings extends StatelessWidget {
                 },
                 child: ListTile(
                   leading: Icon(Icons.favorite),
-                  title: Text("Favorite", style: normalstyling(15) ),
+                  title: Text("Favorite", style: normalstyling(15)),
                   trailing: Icon(Icons.arrow_forward_ios_sharp),
                 ),
               ),
@@ -89,7 +95,7 @@ class Settings extends StatelessWidget {
                   bottom: sizeof.size.height * 0.02,
                   top: sizeof.size.height * 0.02),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   Get.to(const ChatPage());
                 },
                 child: ListTile(

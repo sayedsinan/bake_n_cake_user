@@ -1,17 +1,11 @@
-import 'package:bake_n_cake_user_side/controller/payment_controller.dart';
 import 'package:bake_n_cake_user_side/controller/user_controller.dart';
 import 'package:bake_n_cake_user_side/style/color.dart';
 import 'package:bake_n_cake_user_side/style/text_style.dart';
-import 'package:bake_n_cake_user_side/view/cart/buttom.dart';
-import 'package:bake_n_cake_user_side/view/orders/my_orders.dart';
-import 'package:bake_n_cake_user_side/view/productview/product_view.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({Key? key});
+class MyOrders extends StatelessWidget {
+  const MyOrders({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +23,7 @@ class CartPage extends StatelessWidget {
         backgroundColor: maincolor,
         centerTitle: true,
         title: Text(
-          "My Cart",
+          "My Order",
           style: heading(20),
         ),
       ),
@@ -47,7 +41,7 @@ class CartPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      Get.to(ProductView(index));
+                    
                     },
                     child: ListTile(
                       shape: RoundedRectangleBorder(
@@ -134,67 +128,11 @@ class CartPage extends StatelessWidget {
               },
             ),
 
-            SizedBox(height: sizeof.size.height * 0.02),
-            Divider(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 20),
-                  child: Text("Total"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10, top: 20),
-                  child: Text(sum.toString()),
-                )
-              ],
-            ),
-            SizedBox(height: sizeof.size.height * 0.1),
-            // Pass sum to cartButton widget
-            cartButton(sizeof, sum),
+           
+        
           ],
         ),
       ),
     );
   }
 }
-
-// Define cartButton widget
-Widget cartButton(MediaQueryData sizeof, double totalAmount) {
-  var currentuser = FirebaseAuth.instance.currentUser;
-  final paymentController = Get.find<PaymentController>();
-  final controller = Get.find<UserController>();
-  return ElevatedButton(
-    onPressed: () async {
-      for (var item in controller.cartItems) {
-        try {
-          await FirebaseFirestore.instance.collection('Orders').add({
-            'customerName': "Sinan",
-            'productName': item.name,
-            'productWeight': '1',
-            'productImage': item.image,
-            'date': DateTime.now(),
-          });
-        } catch (e) {
-          print("Error placing order: $e");
-        }
-      }
-     
-      paymentController.openCheckout(totalAmount);
-      // paymentController.addOrder();
-    },
-    child: Text(
-      'Place Order',
-      style: TextStyle(fontSize: 18),
-    ),
-    style: ElevatedButton.styleFrom(
-      foregroundColor: Colors.white, backgroundColor: Colors.black,
-      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-      ),
-    ),
-  );
-}
-
-// Define handlePayment function

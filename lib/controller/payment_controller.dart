@@ -70,6 +70,7 @@ class PaymentController extends GetxController {
       paymentStatus: paymentStatus,
     );
     await addOrder(order);
+
   }
 
   Future<void> addOrder(ProductOrder order) async {
