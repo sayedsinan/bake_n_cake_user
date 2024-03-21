@@ -5,14 +5,14 @@ class Messeage {
   final String senderEmail;
   final String reciverId;
   final String messeage;
-  final Timestamp time;
+  final Timestamp timestamp;
 
-  Messeage({
+  Messeage( {
     required this.senderUserId,
     required this.senderEmail,
     required this.reciverId,
+    required this.timestamp,
     required this.messeage,
-    required this.time,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,6 +21,7 @@ class Messeage {
       'senderEmail': senderEmail,
       'recivrId': reciverId,
       'message': messeage,
+      'timestamp':timestamp,
     };
   }
 }

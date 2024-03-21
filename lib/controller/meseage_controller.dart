@@ -19,7 +19,7 @@ class MesseageController extends GetxController {
       senderEmail: currentUserEmail,
       reciverId: reciverId,
       messeage: message,
-      time: timestamp,
+      timestamp: timestamp
     );
     List<String> ids = [currentUserId, reciverId];
     ids.sort();
@@ -35,6 +35,7 @@ class MesseageController extends GetxController {
     List<String> ids = [userId, otherUserId];
     ids.sort();
     String chatRoomId = ids.join("_");
+      print('Chat Room ID: $chatRoomId'); 
     return firestore
         .collection('chat_rooms')
         .doc(chatRoomId)
@@ -70,7 +71,9 @@ class MesseageController extends GetxController {
       stream: getMesseage(reciver, fireAut.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
+          
+      print('Stream Error: ${snapshot.error}'); // Print stream error
+        return Text("Error: ${snapshot.error}");
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -79,8 +82,9 @@ class MesseageController extends GetxController {
           );
         }
 
-        if (!snapshot.hasData) {
-          return Text("No data available");
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                print('No messages available'); 
+          return const Text("No messages available");
         }
 
         QuerySnapshot querySnapshot = snapshot.data as QuerySnapshot;
