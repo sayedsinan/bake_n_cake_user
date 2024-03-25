@@ -1,5 +1,6 @@
 import 'package:bake_n_cake_user_side/combonents/my_text_field.dart';
 import 'package:bake_n_cake_user_side/model/messeage.dart';
+import 'package:bake_n_cake_user_side/view/chat/chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 
 class MesseageController extends GetxController {
   final TextEditingController message = TextEditingController();
- final reciver ='GaLJKbvQMFTWVWFwifItB9F8u8P2';
+  final reciver = 'GaLJKbvQMFTWVWFwifItB9F8u8P2';
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth fireAut = FirebaseAuth.instance;
   Future<void> sendMesseage(String reciverId, String message) async {
@@ -15,12 +16,11 @@ class MesseageController extends GetxController {
     final String currentUserEmail = fireAut.currentUser!.email.toString();
     final Timestamp timestamp = Timestamp.now();
     Messeage newMessage = Messeage(
-      senderUserId: currentUserId,
-      senderEmail: currentUserEmail,
-      reciverId: reciverId,
-      messeage: message,
-      timestamp: timestamp
-    );
+        senderUserId: currentUserId,
+        senderEmail: currentUserEmail,
+        reciverId: reciverId,
+        messeage: message,
+        timestamp: timestamp);
     List<String> ids = [currentUserId, reciverId];
     ids.sort();
     String chatroomId = ids.join("_");
@@ -35,7 +35,7 @@ class MesseageController extends GetxController {
     List<String> ids = [userId, otherUserId];
     ids.sort();
     String chatRoomId = ids.join("_");
-      print('Chat Room ID: $chatRoomId'); 
+  
     return firestore
         .collection('chat_rooms')
         .doc(chatRoomId)
@@ -61,7 +61,7 @@ class MesseageController extends GetxController {
             obscureText: false,
           ),
         ),
-        IconButton(onPressed: sendMessage, icon: Icon(Icons.send))
+        IconButton(onPressed: sendMessage, icon:const  Icon(Icons.send))
       ],
     );
   }
@@ -71,19 +71,18 @@ class MesseageController extends GetxController {
       stream: getMesseage(reciver, fireAut.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          
-      print('Stream Error: ${snapshot.error}'); // Print stream error
-        return Text("Error: ${snapshot.error}");
+        // Print stream error
+          return Text("Error: ${snapshot.error}");
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const  Center(
             child: CircularProgressIndicator(),
           );
         }
 
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                print('No messages available'); 
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+     
           return const Text("No messages available");
         }
 
@@ -99,11 +98,21 @@ class MesseageController extends GetxController {
             // Access the document data for each document
             Map<String, dynamic> data =
                 docs[index].data() as Map<String, dynamic>;
-
-            // Use the data to build a custom widget, for example a ListTile
-            return ListTile(
-              title: Text(data[
-                  'message']), // Assuming 'message' is a field in the document
+            var alignment = (data['senderId'] == fireAut.currentUser!.uid)
+                ? Alignment.centerRight
+                : Alignment.centerLeft;
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                alignment: alignment,
+                child: Column(
+                  children: [
+                    ChatBubble(
+                      messeage: data['message'],
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         );
@@ -121,7 +130,6 @@ class MesseageController extends GetxController {
       alignment: alignment,
       child: Column(
         children: [
-       
           Text(data['message']),
         ],
       ),

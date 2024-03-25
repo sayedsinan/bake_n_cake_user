@@ -26,7 +26,9 @@ Column signUpTextField() {
       padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
       child: TextField(
         controller: controller.firstPassword,
+           obscureText: true,
         decoration: InputDecoration(
+          
             labelText: 'Password',
             border: OutlineInputBorder(
               borderSide: BorderSide(color: textColor),
@@ -46,7 +48,9 @@ Column signUpTextField() {
       padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
       child: TextField(
         controller: controller.assurePassword,
+           obscureText: true,
         decoration: InputDecoration(
+          
             labelText: 'Re-enter',
             border: OutlineInputBorder(
               borderSide: BorderSide(color: textColor),

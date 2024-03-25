@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bake_n_cake_user_side/model/prodcuts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -90,6 +91,35 @@ class UserController extends GetxController {
     Get.to(() => const Login());
   }
 
+
+Future<dynamic> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on Exception catch (e) {
+    
+    }
+  }
+
+  Future<bool> signOutFromGoogle() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
+
   signInwithField() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: loginName.text,
@@ -129,9 +159,8 @@ class UserController extends GetxController {
         'date': DateTime.now(),
         'userId': user!.uid,
       });
-      print('Order placed successfully');
     } catch (e) {
-      print("Error placing order: $e");
+    
     }
   }
 
@@ -147,6 +176,7 @@ class UserController extends GetxController {
           .collection("Users")
           .doc(usersCollection.user!.email)
           .set({
+        'uid': usersCollection.user!.uid,
         'username': signupEmail.text.split("@")[0],
         'mobileNumber': 'empty',
         'address': '',

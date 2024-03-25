@@ -161,6 +161,16 @@ class CartPage extends StatelessWidget {
 
 // Define cartButton widget
 Widget cartButton(MediaQueryData sizeof, double totalAmount) {
+
+  Future<String> getNextOrderId() async {
+  var lastOrderIdDoc = await FirebaseFirestore.instance.collection('Meta').doc('lastOrderId').get();
+  int lastOrderId = (lastOrderIdDoc.exists ? (lastOrderIdDoc.data()!['lastOrderId'] ?? 0) : 0) as int;
+  int nextOrderId = lastOrderId + 1;
+  await lastOrderIdDoc.reference.set({'lastOrderId': nextOrderId});
+  return nextOrderId.toString();
+}
+
+
   var currentuser = FirebaseAuth.instance.currentUser;
   final paymentController = Get.find<PaymentController>();
   final controller = Get.find<UserController>();
@@ -168,12 +178,14 @@ Widget cartButton(MediaQueryData sizeof, double totalAmount) {
     onPressed: () async {
       for (var item in controller.cartItems) {
         try {
+          String orderId = await getNextOrderId();
           await FirebaseFirestore.instance.collection('Orders').add({
             'customerName': "Sinan",
             'productName': item.name,
             'productWeight': '1',
             'productImage': item.image,
             'date': DateTime.now(),
+            'orderId':orderId
           });
         } catch (e) {
           print("Error placing order: $e");
