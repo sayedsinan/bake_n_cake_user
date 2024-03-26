@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCgCMXxtA6-uezDZ_9u0074J1vkFK88U1k',
-    appId: '1:274382156691:android:b745915ce29329b4096e66',
+    appId: '1:274382156691:android:9ae36abf6066f1cc096e66',
     messagingSenderId: '274382156691',
     projectId: 'bakecakeadmin',
     storageBucket: 'bakecakeadmin.appspot.com',
