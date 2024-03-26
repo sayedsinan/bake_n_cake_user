@@ -54,7 +54,10 @@ Card myCard(MediaQueryData sizeof, int index) {
                 style: normalstyling(15),
               ),
             ),
-            favoriteIcon(index)
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: favoriteIcon(index),
+            )
           ],
         )
       ],
